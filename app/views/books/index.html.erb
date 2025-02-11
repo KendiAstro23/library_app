@@ -1,0 +1,9 @@
+<h1>Available Books</h1>
+<ul>
+  <% @books.each do |book| %>
+    <li>
+      <%= link_to book.title, book_path(book) %> by <%= book.author %>
+      <%= "(Available)" if book.available? %>
+    </li>
+  <% end %>
+</ul>

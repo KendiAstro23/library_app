@@ -1,0 +1,9 @@
+<h1>Your Borrowed Books</h1>
+<ul>
+  <% current_user.borrowings.where(returned_at: nil).each do |borrowing| %>
+    <li>
+      <%= borrowing.book.title %> (Due: <%= borrowing.due_date %>)
+      <%= button_to "Return", borrowing_path(borrowing), method: :delete %>
+    </li>
+  <% end %>
+</ul>
