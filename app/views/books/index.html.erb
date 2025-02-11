@@ -1,9 +1,11 @@
-<h1>Available Books</h1>
-<ul>
-  <% @books.each do |book| %>
-    <li>
-      <%= link_to book.title, book_path(book) %> by <%= book.author %>
-      <%= "(Available)" if book.available? %>
-    </li>
+<div class="form-container">
+  <h1>Welcome to the Library App</h1>
+  <% if current_user %>
+    <p>You are logged in as <%= current_user.email %>.</p>
+    <%= link_to "View Books", books_path, class: "btn btn-primary" %>
+    <%= button_to "Logout", destroy_session_path, method: :delete, class: "btn btn-danger" %>
+  <% else %>
+    <%= link_to "Sign In", new_session_path, class: "btn btn-primary" %>
+    <%= link_to "Create Account", new_user_path, class: "btn btn-success" %>
   <% end %>
-</ul>
+</div>
