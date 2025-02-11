@@ -1,29 +1,25 @@
-<div class="form-container">
-  <h1>Create Account</h1>
-
-  <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
-  <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
-
-  <%= form_with model: @user, url: sign_up_path do |form| %>
+<%= form_with model: @user, url: sign_up_path do |form| %>
+    <div>
+      <%= form.label :name %>
+      <%= form.text_field :name, required: true, placeholder: "Enter your name" %>
+    </div>
+  
     <div>
       <%= form.label :email %>
-      <%= form.email_field :email, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address" %>
+      <%= form.email_field :email, required: true, placeholder: "Enter your email" %>
     </div>
-
+  
     <div>
       <%= form.label :password %>
-      <%= form.password_field :password, required: true, autocomplete: "new-password", placeholder: "Enter your password" %>
+      <%= form.password_field :password, required: true, placeholder: "Enter your password" %>
     </div>
-
+  
     <div>
       <%= form.label :password_confirmation %>
-      <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password", placeholder: "Confirm your password" %>
+      <%= form.password_field :password_confirmation, required: true, placeholder: "Confirm your password" %>
     </div>
-
+  
     <div>
-      <%= form.submit "Create Account", class: "btn btn-success" %>
+      <%= form.submit "Create Account" %>
     </div>
   <% end %>
-
-  <p>Already have an account? <%= link_to "Sign In", new_session_path %></p>
-</div>

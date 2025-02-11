@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root "books#index"
+  root "books#index" # Main dashboard
 
   # Authentication routes
   get "sign_up", to: "users#new", as: :new_user
