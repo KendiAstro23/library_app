@@ -38,7 +38,11 @@ gem "kamal", require: false
 gem "thruster", require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
+<<<<<<< HEAD
 # gem "image_processing", "~> 1.2"
+=======
+  gem "image_processing", "~> 1.2"
+>>>>>>> ce00263 (second draft, new files)
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
@@ -61,3 +65,8 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+<<<<<<< HEAD
+=======
+
+gem "tailwindcss-rails", "~> 4.0"
+>>>>>>> ce00263 (second draft, new files)

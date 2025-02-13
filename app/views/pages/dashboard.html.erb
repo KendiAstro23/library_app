@@ -1,0 +1,5 @@
+<div class="space-y-12">
+<h1>Dashboard</h1>
+<p> Welcome <%= Current.user.email_address %>!
+<%=button_to "Logout", session_path, method: :delete %>
+</div>

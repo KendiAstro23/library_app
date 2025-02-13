@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+<<<<<<< HEAD
   before_action :authenticate_user!
 
   private
@@ -14,3 +15,9 @@ class ApplicationController < ActionController::Base
   end
   helper_method :current_user
 end
+=======
+  include Authentication
+  # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.
+  allow_browser versions: :modern
+end
+>>>>>>> ce00263 (second draft, new files)

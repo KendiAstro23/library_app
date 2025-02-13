@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ce00263 (second draft, new files)
 <head>
   <title>LibraryApp</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
+<<<<<<< HEAD
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
 
@@ -32,3 +37,26 @@
   <%= yield %>
 </body>
 </html>
+=======
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+
+<body class="min-h-screen bg-gray-100 bg-cover bg-center" style="background-image: url('<%= asset_path('background.jpg') %>')">
+  <main class="container mx-auto px-4">
+    <nav class="flex justify-end gap-4 py-4">
+      <% if current_user %>
+        <%= link_to "Profile", user_profile_path, class: "text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700" %>
+        <%= button_to "Logout", destroy_session_path, method: :delete, class: "text-white bg-red-600 px-4 py-2 rounded hover:bg-red-700" %>
+      <% else %>
+        <%= link_to "Sign In", new_session_path, class: "text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700" %>
+        <%= link_to "Sign Up", new_user_path, class: "text-white bg-green-600 px-4 py-2 rounded hover:bg-green-700" %>
+      <% end %>
+    </nav>
+
+    <%= yield %>
+  </main>
+</body>
+</html>
+>>>>>>> ce00263 (second draft, new files)
