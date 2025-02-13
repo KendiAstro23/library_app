@@ -1,5 +1,7 @@
+# config/routes.rb
 Rails.application.routes.draw do
-  root "books#index" # Main dashboard
+  get "home/index"
+  root "home#index" # Unified landing page
 
   # Authentication routes
   get "sign_up", to: "users#new", as: :new_user
@@ -8,7 +10,7 @@ Rails.application.routes.draw do
   post "login", to: "sessions#create", as: :login
   delete "logout", to: "sessions#destroy", as: :destroy_session
 
-  # Resource routes
+  # Main dashboard
   resources :books, only: [:index, :show]
   resources :borrowings, only: [:create, :destroy]
   get "profile", to: "users#profile", as: :user_profile
