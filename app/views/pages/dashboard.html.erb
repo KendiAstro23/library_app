@@ -5,11 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Library Dashboard</title>
     <style>
-        body { font-family: Arial, sans-serif; }
-        .container { max-width: 1200px; margin: auto; padding: 20px; }
-        .nav { display: flex; justify-content: space-between; padding: 10px; background: #4CAF50; color: white; }
-        .books-section { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
-        .book-card { padding: 10px; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; }
+    body { font-family: Arial, sans-serif; }
+    .container { max-width: 1200px; margin: auto; padding: 20px; }
+    .nav { display: flex; justify-content: space-between; padding: 10px; background: #4CAF50; color: white; }
+    .books-section { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .book-card { padding: 10px; border: 1px solid #ddd; border-radius: 5px; background: #f9f9f9; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .book-card img { width: 150px; height: 225px; margin-bottom: 10px; }
+    .book-info { display: flex; flex-direction: column; }
+    h2, h3 { color: #ff6600; }
+    .button { margin-top: 10px; padding: 5px 10px; background: #4CAF50; color: white; border: none; cursor: pointer; border-radius: 3px; }
+    .button:hover { background: #45a049; }
     </style>
 </head>
 <body>
@@ -29,30 +34,103 @@
     <h2>Welcome, <%= current_user.username %>!</h2>
     
     <h3>Borrowed Books</h3>
-    <div class="books-section">
-    <% if @borrowed_books.present? %>
-    <% @borrowed_books.each do |book| %>
-        <div class="book-card"><%= book.title %> - Borrowed</div>
-    <% end %>
-    <% else %>
-    <p>No borrowed books yet.</p>
-    <% end %>
+        <div class="books-section">
+            <div class="book-card">
+                <%= image_tag 'book1.jpg', alt: 'Book 1' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 1<br>
+                    <strong>Author:</strong> Author A<br>
+                    <strong>ISBN:</strong> 1234567890<br>
+                    <strong>Due Date:</strong> <%= 2.weeks.from_now.strftime('%Y-%m-%d') %>
+                </div>
+                <button class="button">View Details</button>
+            </div>
+            <div class="book-card">
+                <%= image_tag 'book2.jpg', alt: 'Book 2' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 2<br>
+                    <strong>Author:</strong> Author B<br>
+                    <strong>ISBN:</strong> 0987654321<br>
+                    <strong>Due Date:</strong> <%= 2.weeks.from_now.strftime('%Y-%m-%d') %>
+                </div>
+                <button class="button">View Details</button>
+            </div>
+            <div class="book-card">
+                <%= image_tag 'book7.jpg', alt: 'Book 7' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 2<br>
+                    <strong>Author:</strong> Author B<br>
+                    <strong>ISBN:</strong> 0987654321<br>
+                    <strong>Due Date:</strong> <%= 2.weeks.from_now.strftime('%Y-%m-%d') %>
+                </div>
+                <button class="button">View Details</button>
+            </div>
+        </div>
+        
+        <h3>Returned Books</h3>
+        <div class="books-section">
+            <div class="book-card">
+                <%= image_tag 'book3.jpg', alt: 'Book 3' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 3<br>
+                    <strong>Author:</strong> Author C<br>
+                    <strong>ISBN:</strong> 1112223334
+                </div>
+                <button class="button">View Details</button>
+            </div>
+            <div class="book-card">
+                <%= image_tag 'book4.jpg', alt: 'Book 4' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 2<br>
+                    <strong>Author:</strong> Author B<br>
+                    <strong>ISBN:</strong> 0987654321<br>
+                    <strong>Due Date:</strong> <%= 2.weeks.from_now.strftime('%Y-%m-%d') %>
+                </div>
+                <button class="button">View Details</button>
+            </div>
+            <div class="book-card">
+                <%= image_tag 'book8.jpg', alt: 'Book 8' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 2<br>
+                    <strong>Author:</strong> Author B<br>
+                    <strong>ISBN:</strong> 0987654321<br>
+                    <strong>Due Date:</strong> <%= 2.weeks.from_now.strftime('%Y-%m-%d') %>
+                </div>
+                <button class="button">View Details</button>
+            </div>
+        </div>
+        
+        <h3>Relevant Books for You</h3>
+        <div class="books-section">
+            <div class="book-card">
+                <%= image_tag 'book5.jpg', alt: 'Book 5' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 5<br>
+                    <strong>Author:</strong> Author E<br>
+                    <strong>ISBN:</strong> 9998887776
+                </div>
+                <button class="button">Borrow</button>
+            </div>
+            <div class="book-card">
+                <%= image_tag 'book6.jpg', alt: 'Book 6' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 6<br>
+                    <strong>Author:</strong> Author F<br>
+                    <strong>ISBN:</strong> 6665554443
+                </div>
+                <button class="button">Borrow</button>
+            </div>
+            <div class="book-card">
+                <%= image_tag 'book9.jpg', alt: 'Book 9' %>
+                <div class="book-info">
+                    <strong>Title:</strong> Book 2<br>
+                    <strong>Author:</strong> Author B<br>
+                    <strong>ISBN:</strong> 0987654321<br>
+                    <strong>Due Date:</strong> <%= 2.weeks.from_now.strftime('%Y-%m-%d') %>
+                </div>
+                <button class="button">View Details</button>
+            </div>
+        </div>
     </div>
-    
-    <h3>Returned Books</h3>
-    <div class="books-section">
-        <% @returned_books.each do |book| %>
-            <div class="book-card"><%= book.title %> - Returned</div>
-        <% end %>
-    </div>
-    
-    <h3>Relevant Books for You</h3>
-    <div class="books-section">
-        <% @relevant_books.each do |book| %>
-            <div class="book-card"><%= book.title %> - Available</div>
-        <% end %>
-    </div>
-    </div>
-
 </body>
 </html>
