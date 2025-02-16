@@ -1,6 +1,7 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+<<<<<<< HEAD
   user: one
   book: one
   due_date: 2025-02-11
@@ -9,3 +10,15 @@ two:
   user: two
   book: two
   due_date: 2025-02-11
+=======
+  book: one
+  user: one
+  borrowed_at: 2025-02-14 23:04:29
+  returned_at: 2025-02-14 23:04:29
+
+two:
+  book: two
+  user: two
+  borrowed_at: 2025-02-14 23:04:29
+  returned_at: 2025-02-14 23:04:29
+>>>>>>> 4c5ba97 (read-books building)

@@ -12,6 +12,7 @@
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema[8.0].define(version: 2025_02_11_185132) do
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -35,6 +36,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_13_210539) do
 =======
 ActiveRecord::Schema[8.0].define(version: 2025_02_14_091712) do
 >>>>>>> bc5036a (Dashboard, borrowing page)
+=======
+ActiveRecord::Schema[8.0].define(version: 2025_02_15_044112) do
+>>>>>>> 4c5ba97 (read-books building)
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -71,6 +75,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_091712) do
     t.integer "borrower_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "isbn"
+    t.string "genre"
+    t.text "synopsis"
+    t.string "image_url"
+    t.boolean "available"
+  end
+
+  create_table "borrowings", force: :cascade do |t|
+    t.integer "book_id", null: false
+    t.integer "user_id", null: false
+    t.datetime "borrowed_at"
+    t.datetime "returned_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_borrowings_on_book_id"
+    t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
   create_table "sessions", force: :cascade do |t|
@@ -102,6 +122,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_091712) do
 =======
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+<<<<<<< HEAD
 >>>>>>> ce00263 (second draft, new files)
+=======
+  add_foreign_key "borrowings", "books"
+  add_foreign_key "borrowings", "users"
+>>>>>>> 4c5ba97 (read-books building)
   add_foreign_key "sessions", "users"
 end

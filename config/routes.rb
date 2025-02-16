@@ -18,8 +18,6 @@ Rails.application.routes.draw do
 end
 =======
 Rails.application.routes.draw do
-  get "books/index"
-  get "books/show"
   # Authentication routes
   get "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
@@ -27,8 +25,20 @@ Rails.application.routes.draw do
 
   # User registration routes
   get "sign_up", to: "users#new", as: :new_user
-  post "sign_up", to: "users#create", as: :users  # <== Ensure this exists!
-  get "/profile", to: "users#show", as: :user_profile  # ✅ Creates `user_profile_path`
+  post "sign_up", to: "users#create", as: :users  
+
+  # Books routes (Including Borrow feature)
+  resources :books, only: [:index, :show] do
+    member do
+      post 'borrow'  # Creates borrow_book_path(@book)
+    end
+  end
+
+  get "read_books", to: "books#read_books", as: :read_books  # Route for borrowed books
+
+  # User profile routes
+  resources :users, only: [:new, :create]
+  get "/profile", to: "users#show", as: :user_profile  
 
   # Root and dashboard routes
   root "pages#home"

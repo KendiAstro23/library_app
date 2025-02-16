@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
       # Standard session handling
       session[:user_id] = user.id
       # Redirect to your main authenticated path
-      redirect_to books_index_path, notice: "Logged in successfully!"
+      redirect_to dashboard_path, notice: "Logged in successfully!"
     else
       flash.now[:alert] = "Invalid email address or password"
       render :new

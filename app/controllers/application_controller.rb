@@ -10,10 +10,14 @@ class ApplicationController < ActionController::Base
   private
 
   def authenticate_user!
+<<<<<<< HEAD
     unless current_user
       redirect_to new_session_path, alert: "You must be logged in to access this page."
     end
     redirect_to new_session_path unless current_user
+=======
+    redirect_to sign_in_path unless current_user
+>>>>>>> 4c5ba97 (read-books building)
   end
 
   def current_user
