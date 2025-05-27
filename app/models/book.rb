@@ -16,7 +16,11 @@ class Book < ApplicationRecord
   has_many :borrowings
   has_many :users, through: :borrowings
 
-  # Scope to get books that are currently borrowed
-  scope :borrowed, -> { joins(:borrowings).where(borrowings: { returned_at: nil }) }
+  validates :title, :author, :isbn, presence: true
+  validates :isbn, uniqueness: true
+
+  def borrowed?
+    borrowings.where(returned_at: nil).exists?
+  end
 end
 

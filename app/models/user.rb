@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_secure_password
-
+  
+  has_many :borrowings
+  has_many :books, through: :borrowings
   # Constants
   MIN_PASSWORD_LENGTH = 6
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i

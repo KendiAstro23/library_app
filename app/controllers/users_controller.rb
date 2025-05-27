@@ -1,16 +1,11 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!
-
-  def new
-    @user = User.new
-  end
-
   before_action :authenticate_user!
 
-  def show
-    @user = current_user  # Fetch the logged-in user
+  def profile
+    @borrowed_books = current_user.books.joins(:borrowings).where(borrowings: { returned_at: nil })
   end
 
+<<<<<<< HEAD
   def create
     @user = User.new(user_params)
 <<<<<<< HEAD
@@ -27,12 +22,29 @@ class UsersController < ApplicationController
     else
       render :new
 >>>>>>> ce00263 (second draft, new files)
-    end
+=======
+  def show
+    @user = current_user  # Make sure to assign the logged-in user
   end
 
+  def edit
+    @user = User.find(params[:id])
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to user_profile_path(@user), notice: 'Profile updated successfully!'
+    else
+      render :edit
+>>>>>>> c3c3bf0 (Improved README)
+    end
+  end
+  
   private
-
+  
   def user_params
+<<<<<<< HEAD
 <<<<<<< HEAD
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
@@ -42,3 +54,9 @@ end
   end  
 end
 >>>>>>> bc5036a (Dashboard, borrowing page)
+=======
+    params.require(:user).permit(:name, :email, :password, :password_confirmation)
+  end
+  
+end
+>>>>>>> c3c3bf0 (Improved README)

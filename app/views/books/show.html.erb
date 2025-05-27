@@ -20,11 +20,11 @@
 <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
   <div style="background: rgba(255, 255, 255, 0.9); padding: 20px; border-radius: 10px; text-align: center; max-width: 600px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);">
 
-    <%# Display the book image from assets %>
-    <% if @book.image_url.present? %>
-      <%= image_tag asset_path("images/#{@book.image_url}"), alt: @book.title, style: "width: 250px; height: auto; display: block; margin: 0 auto 15px;" %>
+    <%# Display the book image, handling both URLs and local assets %>
+    <% if @book.image_url.present? && @book.image_url.start_with?("http") %>
+      <%= image_tag @book.image_url, alt: @book.title, style: "width: 250px; height: auto; display: block; margin: 0 auto 15px;" %>
     <% else %>
-      <p style="font-size: 18px; color: gray;">No Image Available</p>
+      <%= image_tag asset_path("book#{(@book.id % 9) + 1}.jpg"), alt: "Default book cover", style: "width: 250px; height: auto; display: block; margin: 0 auto 15px;" %>
     <% end %>
 
     <h2 style="font-size: 24px; font-weight: bold; margin-bottom: 10px;"><%= @book.title %></h2>

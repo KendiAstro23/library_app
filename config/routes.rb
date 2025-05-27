@@ -31,14 +31,16 @@ Rails.application.routes.draw do
   resources :books, only: [:index, :show] do
     member do
       post 'borrow'  # Creates borrow_book_path(@book)
+      post 'return'
     end
   end
 
   get "read_books", to: "books#read_books", as: :read_books  # Route for borrowed books
 
   # User profile routes
-  resources :users, only: [:new, :create]
-  get "/profile", to: "users#show", as: :user_profile  
+  resources :users, only: [:new, :create, :show, :edit, :update]
+  get '/profile', to: 'users#show', as: 'user_profile' 
+  get "/user_profile", to: "users#profile" 
 
   # Root and dashboard routes
   root "pages#home"
