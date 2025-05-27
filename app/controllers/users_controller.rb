@@ -5,6 +5,12 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
+  before_action :authenticate_user!
+
+  def show
+    @user = current_user  # Fetch the logged-in user
+  end
+
   def create
     @user = User.new(user_params)
 <<<<<<< HEAD
@@ -27,6 +33,12 @@ class UsersController < ApplicationController
   private
 
   def user_params
+<<<<<<< HEAD
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 end
+=======
+    params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
+  end  
+end
+>>>>>>> bc5036a (Dashboard, borrowing page)

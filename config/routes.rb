@@ -18,16 +18,19 @@ Rails.application.routes.draw do
 end
 =======
 Rails.application.routes.draw do
-  # Existing authentication routes (for sign in)
+  get "books/index"
+  get "books/show"
+  # Authentication routes
   get "sign_in", to: "sessions#new"
   post "sign_in", to: "sessions#create"
   delete "logout", to: "sessions#destroy"
 
-  # Add routes for user registration (sign up)
+  # User registration routes
   get "sign_up", to: "users#new", as: :new_user
-  post "sign_up", to: "users#create", as: :users
+  post "sign_up", to: "users#create", as: :users  # <== Ensure this exists!
+  get "/profile", to: "users#show", as: :user_profile  # ✅ Creates `user_profile_path`
 
-  # Defines the root path route ("/")
+  # Root and dashboard routes
   root "pages#home"
   get "dashboard", to: "pages#dashboard"
 end

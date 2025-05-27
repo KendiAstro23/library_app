@@ -3,9 +3,19 @@
 one:
   title: MyString
   author: MyString
+<<<<<<< HEAD
   isbn: MyString
+=======
+  status: MyString
+  borrower_id: 1
+>>>>>>> bc5036a (Dashboard, borrowing page)
 
 two:
   title: MyString
   author: MyString
+<<<<<<< HEAD
   isbn: MyString
+=======
+  status: MyString
+  borrower_id: 1
+>>>>>>> bc5036a (Dashboard, borrowing page)

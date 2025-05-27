@@ -11,6 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema[8.0].define(version: 2025_02_11_185132) do
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -31,6 +32,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_11_185132) do
     t.index ["user_id"], name: "index_borrowings_on_user_id"
 =======
 ActiveRecord::Schema[8.0].define(version: 2025_02_13_210539) do
+=======
+ActiveRecord::Schema[8.0].define(version: 2025_02_14_091712) do
+>>>>>>> bc5036a (Dashboard, borrowing page)
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -60,6 +64,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_13_210539) do
 >>>>>>> ce00263 (second draft, new files)
   end
 
+  create_table "books", force: :cascade do |t|
+    t.string "title"
+    t.string "author"
+    t.string "status"
+    t.integer "borrower_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -79,6 +92,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_13_210539) do
 =======
 >>>>>>> ce00263 (second draft, new files)
     t.string "name"
+    t.string "username"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 

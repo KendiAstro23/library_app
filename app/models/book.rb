@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
+<<<<<<< HEAD
     validates :title, :author, :isbn, presence: true
     validates :isbn, uniqueness: true
   
@@ -9,3 +10,8 @@ class Book < ApplicationRecord
       borrowings.where(returned_at: nil).empty?
     end
   end
+=======
+    belongs_to :borrower, class_name: "User", foreign_key: "borrower_id", optional: true
+  end
+  
+>>>>>>> bc5036a (Dashboard, borrowing page)
