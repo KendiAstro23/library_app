@@ -1,43 +1,10 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-=======
 
->>>>>>> ce00263 (second draft, new files)
 <head>
   <title>LibraryApp</title>
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
-<<<<<<< HEAD
-  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-  <%= javascript_importmap_tags %>
-
-  <style>
-    body {
-      background-image: url('<%= asset_path('background.jpg') %>'); /* Ensure the image is in app/assets/images */
-      background-size: cover;
-      background-position: center;
-      height: 100vh;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-
-    .form-container {
-      background: rgba(255, 255, 255, 0.8);
-      padding: 20px;
-      border-radius: 10px;
-      text-align: center;
-    }
-  </style>
-</head>
-
-<body>
-  <%= yield %>
-</body>
-</html>
-=======
     <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
   <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
@@ -48,17 +15,14 @@
     <nav class="flex justify-end gap-4 py-4">
       <% if current_user %>
         <%= link_to "Profile", user_profile_path, class: "text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700" %>
-        <%= button_to "Logout", logout_path, method: :delete, class: "text-white bg-red-600 px-4 py-2 rounded hover:bg-red-700" %>
+        <%= button_to "Logout", destroy_session_path, method: :delete, class: "text-white bg-red-600 px-4 py-2 rounded hover:bg-red-700" %>
       <% else %>
-        <%= link_to "Sign In", sign_in_path, class: "text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700" %>
+        <%= link_to "Sign In", new_session_path, class: "text-white bg-blue-600 px-4 py-2 rounded hover:bg-blue-700" %>
         <%= link_to "Sign Up", new_user_path, class: "text-white bg-green-600 px-4 py-2 rounded hover:bg-green-700" %>
       <% end %>
-      <%= link_to 'Home', root_path %>
-      <%= link_to 'Book Borrowing', books_path, style: "color: blue; text-decoration: none; margin-left: 20px;" %>
     </nav>
 
     <%= yield %>
   </main>
 </body>
 </html>
->>>>>>> ce00263 (second draft, new files)

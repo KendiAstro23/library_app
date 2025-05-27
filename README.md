@@ -15,7 +15,7 @@ A Ruby on Rails 8 application for managing book borrowing and returns with user 
 
 ## Technologies
 
-- Ruby 3.x
+- Ruby 3.3.7
 - Rails 8
 - SQLite (development)
 - ERB templates
@@ -46,7 +46,7 @@ Run all tests or specific test types (models, controllers, system).
 
 ## Deployment
 
-1. Create Heroku app
+1. Vercel or Heroku
 2. Set up production database
 3. Deploy and migrate database
 

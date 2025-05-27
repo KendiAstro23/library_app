@@ -1,5 +1,4 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 <div class="dashboard-container">
   <h1>Available Books</h1>
   
@@ -25,7 +24,7 @@
     <% end %>
   </div>
 </div>
-=======
+
 <div>
   <h1 class="font-bold text-4xl">Books#index</h1>
   <p>Find me in app/views/books/index.html.erb</p>
@@ -37,23 +36,34 @@
       </li>
     <% end %>
   </ul>
-=======
 # app/views/books/index.html.erb
 <h1 style="color: #007BFF;">Book Library</h1>
+
 <div class="books-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+  <% default_images = ['book1.jpg', 'book2.jpg', 'book7.jpg', 'book3.jpg', 'book4.jpg', 'book8.jpg', 'book5.jpg', 'book6.jpg', 'book9.jpg'] %>
+
   <% @books.each_with_index do |book, index| %>
     <div class="book-item" style="padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #fff;">
       <h2 style="color: #007BFF;"><%= link_to book.title, book_path(book) %></h2>
       <p><strong>Author:</strong> <span style="color: #28A745;"><%= book.author %></span></p>
+
       <% if book.image_url.present? %>
         <img src="<%= book.image_url %>" alt="Book cover" style="width: 150px; height: 200px; object-fit: cover;">
       <% else %>
-        <% default_images = ['book1.jpg', 'book2.jpg', 'book7.jpg', 'book3.jpg', 'book4.jpg', 'book8.jpg', 'book5.jpg', 'book6.jpg', 'book9.jpg'] %>
         <img src="<%= asset_path(default_images[index % default_images.size]) %>" alt="Default book cover" style="width: 150px; height: 200px; object-fit: cover;">
       <% end %>
-      <%= button_to 'Borrow Book', borrow_book_path(book), method: :post, class: 'btn btn-primary', style: 'margin-top: 10px; background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: transform 0.2s ease-in-out;', onmouseover: "this.style.transform='scale(1.1)'", onmouseout: "this.style.transform='scale(1)'" %>
+
+      <% if book.borrowed? %>
+        <button class="btn btn-secondary" disabled style="margin-top: 10px; background-color: gray; color: white; border: none; padding: 10px 20px; border-radius: 5px;">
+          Borrowed
+        </button>
+      <% else %>
+        <%= button_to 'Borrow Book', borrow_book_path(book), method: :post, class: 'btn btn-primary',
+            style: 'margin-top: 10px; background-color: #007BFF; color: white; border: none; padding: 10px 20px; border-radius: 5px; transition: transform 0.2s ease-in-out;',
+            onmouseover: "this.style.transform='scale(1.1)'",
+            onmouseout: "this.style.transform='scale(1)'" %>
+      <% end %>
     </div>
   <% end %>
->>>>>>> c3c3bf0 (Improved README)
 </div>
->>>>>>> bc5036a (Dashboard, borrowing page)
+

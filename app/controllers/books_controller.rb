@@ -2,59 +2,46 @@ class BooksController < ApplicationController
 <<<<<<< HEAD
 <<<<<<< HEAD
   before_action :authenticate_user!
+  before_action :set_book, only: [:show, :borrow, :return]
 
   def index
-    @books = Book.all
-  end
-
-  def show
-    @book = Book.find(params[:id])
-  end
-end
-=======
-  def index
-    @books = Book.all  # Fetch all books
-  end
-=======
-  before_action :authenticate_user!
->>>>>>> c3c3bf0 (Improved README)
-
-  def index
-    @books = Book.all
-    puts "Books count: #{@books.count}"
+    @books = Book.all.includes(:borrowings)
   end
 
   def read_books
-    @books = Book.where(borrower_id: current_user.id)  # Or your relevant condition
+    @books = current_user.borrowed_books
+    @borrowings = current_user.borrowings.where(returned_at: nil).includes(:book)
   end
-  
 
   def show
-    @book = Book.find(params[:id])
   end
 
   def borrow
-    @book = Book.find(params[:id])
-    if @book.available?
-      @book.borrowings.create(user: current_user, borrowed_at: Time.current)
-      redirect_to user_profile_path, notice: "You have successfully borrowed '#{@book.title}'!"
-    else
-      redirect_to @book, alert: "This book is already borrowed."
-    end
+  if @book.borrowed?
+    redirect_to books_path, alert: "Book is already borrowed."
+  else
+    borrowing = current_user.borrowings.create!(book: @book, borrowed_at: Time.current)
+    redirect_to read_books_books_path, notice: "You have successfully borrowed '#{@book.title}'."
   end
-<<<<<<< HEAD
 end
->>>>>>> bc5036a (Dashboard, borrowing page)
-=======
 
   def return
-    @borrowing = current_user.borrowings.find_by(book_id: params[:id], returned_at: nil)
-    if @borrowing
-      @borrowing.update(returned_at: Time.current)
-      redirect_to user_profile_path, notice: "You have successfully returned '#{@borrowing.book.title}'!"
+    borrowing = current_user.borrowings.find_by(book: @book, returned_at: nil)
+
+    if borrowing
+      borrowing.update(returned_at: Time.current)
+      redirect_to user_profile_path, notice: "You have successfully returned '#{@book.title}'!"
     else
-      redirect_to user_profile_path, alert: "You haven't borrowed this book."
+      redirect_to user_profile_path, alert: "You haven't borrowed this book or it's already returned."
+    end
+  end
+
+  private
+
+  def set_book
+    @book = Book.find_by(id: params[:id])
+    unless @book
+      redirect_to books_path, alert: "Book not found."
     end
   end
 end
->>>>>>> c3c3bf0 (Improved README)

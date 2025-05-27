@@ -1,14 +1,16 @@
-<h1>Read Books</h1>
+<h1>My Borrowed Books</h1>
 
-<% if @books.present? %>
+<% if @borrowings.present? %>
   <div class="books-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
-    <% @books.each do |book| %>
+    <% @borrowings.each do |borrowing| %>
+      <% book = borrowing.book %>
       <div class="book-item" style="padding: 15px; border: 1px solid #ccc; border-radius: 8px; background-color: #fff;">
         <h2 style="color: #007BFF;"><%= book.title %></h2>
         <p><strong>Author:</strong> <span style="color: #28A745;"><%= book.author %></span></p>
+        <p><strong>Due Date:</strong> <%= borrowing.due_date.strftime("%B %d, %Y") %></p>
       </div>
     <% end %>
   </div>
 <% else %>
-  <p>No books found!</p>
+  <p>You haven't borrowed any books yet.</p>
 <% end %>

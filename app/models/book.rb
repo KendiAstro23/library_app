@@ -20,7 +20,11 @@ class Book < ApplicationRecord
   validates :isbn, uniqueness: true
 
   def borrowed?
-    borrowings.where(returned_at: nil).exists?
-  end
+  borrowings.where(returned_at: nil).exists?
+end
+
+def available?
+  !borrowed?
+end
 end
 

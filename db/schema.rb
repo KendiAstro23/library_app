@@ -13,6 +13,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ActiveRecord::Schema[8.0].define(version: 2025_02_11_185132) do
   create_table "books", force: :cascade do |t|
     t.string "title"
@@ -39,6 +40,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_14_091712) do
 =======
 ActiveRecord::Schema[8.0].define(version: 2025_02_15_044112) do
 >>>>>>> 4c5ba97 (read-books building)
+=======
+ActiveRecord::Schema[8.0].define(version: 2025_05_27_164153) do
+>>>>>>> e005310 (ebugged the borrowing books section, added my books page, improved login and profile editing)
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -89,6 +93,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_15_044112) do
     t.datetime "returned_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "due_date"
     t.index ["book_id"], name: "index_borrowings_on_book_id"
     t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
