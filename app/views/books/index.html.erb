@@ -204,7 +204,7 @@
             class: "search-input",
             value: params[:search] %>
       <% end %>
-    </div>
+  </div>
 
     <% if params[:search].present? %>
       <% if @google_books&.any? || @open_library_books&.any? %>
@@ -212,7 +212,7 @@
         <div class="books-grid">
           <% if @google_books&.any? %>
             <% @google_books.each do |book| %>
-              <div class="book-card">
+      <div class="book-card">
                 <% if book[:image_url].present? %>
                   <%= image_tag book[:image_url], alt: book[:title], class: "book-image" %>
                 <% else %>
@@ -248,8 +248,8 @@
                 <% else %>
                   <div class="placeholder-image">
                     <span>No Cover Available</span>
-                  </div>
-                <% end %>
+      </div>
+    <% end %>
                 <div class="book-info">
                   <h3 class="book-title">
                     <%= book[:title] %>
@@ -267,17 +267,17 @@
                   <div class="button-group">
                     <%= button_to "Add to Library", books_path(open_library_isbn: book[:isbn]), method: :post, class: "button button-primary" %>
                   </div>
-                </div>
-              </div>
+  </div>
+</div>
             <% end %>
-          <% end %>
+    <% end %>
         </div>
       <% else %>
         <div class="text-center text-gray-600 my-8">
           <p>No results found for "<%= params[:search] %>". Try a different search term.</p>
         </div>
       <% end %>
-    <% end %>
+      <% end %>
 
     <% if @books.any? %>
       <h2 class="section-title">Library Collection</h2>
@@ -313,16 +313,16 @@
                   <%= button_to "Borrow", borrow_book_path(book), method: :post, class: "button button-primary" %>
                 <% else %>
                   <button disabled class="button bg-gray-400 text-white cursor-not-allowed">
-                    Borrowed
-                  </button>
+          Borrowed
+        </button>
                 <% end %>
               </div>
             </div>
           </div>
-        <% end %>
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
+  <% end %>
+</div>
 </body>
 </html>
 

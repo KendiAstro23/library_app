@@ -140,9 +140,9 @@
     <div class="book-header">
       <% if @book.image_url.present? %>
         <%= image_tag @book.image_url, alt: @book.title, class: "book-image" %>
-      <% else %>
+<% else %>
         <%= image_tag "book#{@book.id % 9 + 1}.jpg", alt: @book.title, class: "book-image" %>
-      <% end %>
+<% end %>
 
       <div class="book-info">
         <h1 class="book-title">
@@ -177,13 +177,13 @@
             <p class="meta-label">Status</p>
             <p class="meta-value"><%= @book.status.titleize %></p>
           </div>
-        </div>
+</div>
 
         <% if @book.description.present? %>
           <div class="book-description">
             <%= @book.description %>
           </div>
-        <% end %>
+<% end %>
 
         <div class="button-group">
           <% if @book.borrowed_by?(current_user) %>
@@ -195,15 +195,15 @@
             <% end %>
           <% elsif @book.available? %>
             <%= button_to "Borrow Book", borrow_book_path(@book), method: :post, class: "button button-primary" %>
-          <% else %>
+    <% else %>
             <button disabled class="button button-disabled">Currently Borrowed</button>
-          <% end %>
+    <% end %>
 
           <% if @is_saved %>
             <%= button_to "Unsave Book", unsave_book_path(@book), method: :delete, class: "button button-outline" %>
-          <% else %>
+    <% else %>
             <%= button_to "Save for Later", save_book_path(@book), method: :post, class: "button button-outline" %>
-          <% end %>
+      <% end %>
         </div>
       </div>
     </div>

@@ -40,10 +40,10 @@ module Authentication
         ip_address: request.remote_ip,
         last_active_at: Time.current
       )
-      Current.session = session
+        Current.session = session
       Current.user = user
-      cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
-    end
+        cookies.signed.permanent[:session_id] = { value: session.id, httponly: true, same_site: :lax }
+      end
 
     def destroy_session
       Current.session&.destroy
