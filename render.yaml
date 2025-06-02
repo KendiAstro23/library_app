@@ -16,14 +16,8 @@ services:
         fromDatabase:
           name: library_app_production
           property: connectionString
-      - key: DATABASE_HOST
-        fromDatabase:
-          name: library_app_production
-          property: host
-      - key: DATABASE_PASSWORD
-        fromDatabase:
-          name: library_app_production
-          property: password
+      - key: RAILS_MASTER_KEY
+        sync: false
       - key: RAILS_ENV
         value: production
       - key: SECRET_KEY_BASE

@@ -170,13 +170,13 @@
       <div class="books-grid">
         <% if @borrowed_books.any? %>
           <% @borrowed_books.each do |book| %>
-            <div class="book-card">
+      <div class="book-card">
               <% if book.image_url.present? %>
                 <%= image_tag book.image_url, alt: book.title, class: "book-image" %>
               <% else %>
                 <%= image_tag "book#{book.id % 9 + 1}.jpg", alt: book.title, class: "book-image" %>
               <% end %>
-              <div class="book-info">
+        <div class="book-info">
                 <h3 class="book-title"><%= book.title %></h3>
                 <p class="book-author">by <%= book.author %></p>
                 <p class="book-meta">
@@ -186,14 +186,14 @@
                   <% end %>
                 </p>
                 <%= button_to "Return Book", return_book_path(book), method: :post, class: "button button-primary" %>
-              </div>
-            </div>
+        </div>
+      </div>
           <% end %>
         <% else %>
           <div class="empty-message">
             <p>You haven't borrowed any books yet.</p>
             <%= link_to "Browse Available Books", books_path, class: "button button-primary mt-4" %>
-          </div>
+        </div>
         <% end %>
       </div>
     </section>
@@ -203,26 +203,26 @@
       <div class="books-grid">
         <% if @returned_books.any? %>
           <% @returned_books.each do |book| %>
-            <div class="book-card">
+      <div class="book-card">
               <% if book.image_url.present? %>
                 <%= image_tag book.image_url, alt: book.title, class: "book-image" %>
               <% else %>
                 <%= image_tag "book#{book.id % 9 + 1}.jpg", alt: book.title, class: "book-image" %>
               <% end %>
-              <div class="book-info">
+        <div class="book-info">
                 <h3 class="book-title"><%= book.title %></h3>
                 <p class="book-author">by <%= book.author %></p>
                 <p class="book-meta">
                   <strong>ISBN:</strong> <%= book.isbn %>
                 </p>
                 <%= link_to "View Details", book_path(book), class: "button button-primary" %>
-              </div>
-            </div>
+      </div>
+    </div>
           <% end %>
         <% else %>
           <div class="empty-message">
             <p>Your reading history will appear here.</p>
-          </div>
+        </div>
         <% end %>
       </div>
     </section>
@@ -232,13 +232,13 @@
       <div class="books-grid">
         <% if @featured_books.any? %>
           <% @featured_books.each do |book| %>
-            <div class="book-card">
+      <div class="book-card">
               <% if book.image_url.present? %>
                 <%= image_tag book.image_url, alt: book.title, class: "book-image" %>
               <% else %>
                 <%= image_tag "book#{book.id % 9 + 1}.jpg", alt: book.title, class: "book-image" %>
               <% end %>
-              <div class="book-info">
+        <div class="book-info">
                 <h3 class="book-title"><%= book.title %></h3>
                 <p class="book-author">by <%= book.author %></p>
                 <p class="book-meta">
@@ -251,13 +251,13 @@
                   <%= link_to "View Details", book_path(book), class: "button button-primary mb-2" %>
                   <%= button_to "Borrow Book", borrow_book_path(book), method: :post, class: "button button-secondary" %>
                 </div>
-              </div>
-            </div>
+        </div>
+      </div>
           <% end %>
         <% else %>
           <div class="empty-message">
             <p>No featured books available at the moment.</p>
-          </div>
+        </div>
         <% end %>
       </div>
     </section>
