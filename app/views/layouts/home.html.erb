@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Library App</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+  <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+
+  <style>
+    .bg-library {
+      background-image: url('<%= asset_path('books-lib.jpg') %>');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  </style>
+</head>
+
+<body class="min-h-screen bg-library">
+  <div class="min-h-screen bg-black/40">
+    <nav class="bg-white/90 shadow-lg backdrop-blur-sm">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between h-16">
+          <div class="flex">
+            <%= link_to root_path, class: "flex-shrink-0 flex items-center" do %>
+              <span class="text-xl font-bold text-indigo-600">Library App</span>
+            <% end %>
+          </div>
+
+          <div class="flex items-center">
+            <%= link_to "Sign In", new_session_path, class: "text-gray-900 hover:text-indigo-600 px-3 py-2 rounded-md text-sm font-medium" %>
+            <%= link_to "Sign Up", new_user_path, class: "ml-4 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-md text-sm font-medium" %>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <% if notice %>
+      <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline"><%= notice %></span>
+      </div>
+    <% end %>
+
+    <% if alert %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+        <span class="block sm:inline"><%= alert %></span>
+      </div>
+    <% end %>
+
+    <%= yield %>
+  </div>
+</body>
+</html> 

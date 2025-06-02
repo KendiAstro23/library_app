@@ -1,27 +1,24 @@
 class SessionsController < ApplicationController
-  skip_before_action :authenticate_user!, only: %i[new create]
+  allow_unauthenticated_access only: [:new, :create]
 
   def new
+    redirect_to dashboard_path if authenticated?
   end
 
   def create
-    # Match the parameter names with your form fields
-    user = User.find_by(email_address: params[:email_address])
+    user = User.find_by(email_address: params[:email_address]&.downcase)
     
     if user&.authenticate(params[:password])
-      # Standard session handling
-      session[:user_id] = user.id
-      # Redirect to your main authenticated path
-      redirect_to dashboard_path, notice: "Logged in successfully!"
+      start_new_session_for(user)
+      redirect_to after_authentication_url, notice: "Welcome back, #{user.name}!"
     else
-      flash.now[:alert] = "Invalid email address or password"
-      render :new
+      flash.now[:alert] = "Invalid email or password"
+      render :new, status: :unprocessable_entity
     end
   end
 
   def destroy
-    # Standard session termination
-    session[:user_id] = nil
-    redirect_to root_path, notice: "Logged out successfully!"
+    destroy_session
+    redirect_to root_path, notice: "You have been signed out."
   end
 end

@@ -1,14 +1,28 @@
 class PagesController < ApplicationController
-    before_action :authenticate_user! # Ensure user is logged in
+    allow_unauthenticated_access only: [:home]
+    before_action :authenticate_user!, except: [:home]
 
     def home
-        redirect_to dashboard_path if current_user.present?
+        if authenticated?
+            redirect_to dashboard_path
+        else
+            render layout: 'home'
+        end
     end
   
     def dashboard
-        @borrowed_books = Book.where(borrower_id: current_user.id, status: 'borrowed')
-        @returned_books = Book.where(borrower_id: current_user.id, status: 'returned')
-        @relevant_books = Book.where(status: 'available').where.not(id: @borrowed_books.pluck(:id))
-    end      
-  end
+        @borrowed_books = current_user.borrowings.where(returned_at: nil).includes(:book).map(&:book)
+        @returned_books = current_user.borrowings.where.not(returned_at: nil).includes(:book).map(&:book)
+        @saved_books = current_user.saved_book_list
+        @featured_books = Book.where(status: 'available')
+                             .where.not(id: current_user.borrowings.pluck(:book_id))
+                             .limit(6)
+    end
+
+    def my_books
+        @borrowed_books = current_user.borrowings.where(returned_at: nil).includes(:book).map(&:book)
+        @returned_books = current_user.borrowings.where.not(returned_at: nil).includes(:book).map(&:book)
+        @saved_books = current_user.saved_book_list
+    end
+end
   

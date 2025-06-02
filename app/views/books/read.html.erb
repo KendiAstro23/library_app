@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reading: <%= @book.title %></title>
+  <style>
+    .reader-container {
+      display: flex;
+      flex-direction: column;
+      height: 100vh;
+      background: #f8fafc;
+    }
+    .reader-header {
+      background: white;
+      padding: 1rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      z-index: 10;
+    }
+    .reader-content {
+      flex: 1;
+      padding: 2rem;
+      display: flex;
+      justify-content: center;
+    }
+    .reader-frame {
+      width: 100%;
+      max-width: 1200px;
+      height: calc(100vh - 120px);
+      border: none;
+      border-radius: 0.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .book-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .book-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #2d3748;
+      margin: 0;
+    }
+    .book-author {
+      color: #718096;
+      margin: 0;
+    }
+    .back-button {
+      padding: 0.5rem 1rem;
+      background: #4299e1;
+      color: white;
+      text-decoration: none;
+      border-radius: 0.375rem;
+      font-size: 0.875rem;
+      transition: background-color 0.2s;
+    }
+    .back-button:hover {
+      background: #3182ce;
+    }
+  </style>
+</head>
+<body class="reader-container">
+  <header class="reader-header">
+    <div class="book-info">
+      <h1 class="book-title"><%= @book.title %></h1>
+      <p class="book-author">by <%= @book.author %></p>
+      <div style="flex: 1"></div>
+      <%= link_to "Back to Book", book_path(@book), class: "back-button" %>
+    </div>
+  </header>
+
+  <main class="reader-content">
+    <% if @read_url %>
+      <iframe
+        src="<%= @read_url %>"
+        class="reader-frame"
+        title="Book Reader"
+        allowfullscreen>
+      </iframe>
+    <% elsif @preview_url %>
+      <iframe
+        src="<%= @preview_url %>"
+        class="reader-frame"
+        title="Book Preview"
+        allowfullscreen>
+      </iframe>
+    <% end %>
+  </main>
+</body>
+</html> 

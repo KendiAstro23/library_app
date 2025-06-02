@@ -1,34 +1,36 @@
 class UsersController < ApplicationController
-  skip_before_action :authenticate_user!, only: [:new, :create]
+  allow_unauthenticated_access only: [:new, :create]
 
   def new
     @user = User.new
   end
 
+  def create
+    @user = User.new(user_params)
+    
+    if @user.save
+      start_new_session_for(@user)
+      redirect_to dashboard_path, notice: "Welcome to the Library App!"
+    else
+      render :new, status: :unprocessable_entity
+    end
+  end
+
   def show
     @user = current_user
+    @borrowed_books = @user.books.where(status: 'borrowed')
+    @returned_books = @user.books.where(status: 'returned')
   end
 
   def edit
     @user = current_user
   end
 
-  def create
-    @user = User.new(user_params)
-    if @user.save
-      session[:user_id] = @user.id
-      redirect_to books_path, notice: "Account created successfully!"
-    else
-      flash[:alert] = @user.errors.full_messages.join(", ")
-      render :new, status: :unprocessable_entity
-    end
-  end
-
   def update
     @user = current_user
-
+    
     if @user.update(user_params)
-      redirect_to user_profile_path, notice: "Profile updated successfully."
+      redirect_to user_profile_path, notice: "Profile updated successfully!"
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,6 +39,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:name, :email_address, :password, :password_confirmation)
+    params.require(:user).permit(:name, :username, :email_address, :password, :password_confirmation)
   end
 end

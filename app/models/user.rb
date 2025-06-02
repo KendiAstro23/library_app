@@ -1,8 +1,12 @@
 class User < ApplicationRecord
   has_secure_password
   
+  has_many :sessions, dependent: :destroy
   has_many :borrowings
   has_many :books, through: :borrowings
+  has_many :saved_books
+  has_many :saved_book_list, through: :saved_books, source: :book
+  has_many :borrowed_books, class_name: "Book", foreign_key: "borrower_id"
   # Constants
   MIN_PASSWORD_LENGTH = 6
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
@@ -16,8 +20,6 @@ class User < ApplicationRecord
   validates :password, length: { minimum: MIN_PASSWORD_LENGTH },
                        allow_nil: true  # Allow nil for updates without password change
   validates :password_confirmation, presence: true, on: :create
-
-  has_many :borrowed_books, class_name: "Book", foreign_key: "borrower_id"
 
   # Callbacks
   before_save :downcase_email_address

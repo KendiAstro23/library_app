@@ -26,3 +26,13 @@ Book.create([
     {title: "The Will of The Many", author: "James Islington", isbn: "6665554443" },
     {title: "If Tomorrow Comes", author: "Sidney Sheldon", isbn: "0987654321" }
 ])
+
+# Create demo user if it doesn't exist
+demo_user = User.find_or_create_by!(email_address: 'demo@example.com') do |user|
+  user.name = 'Demo User'
+  user.username = 'demo_user'
+  user.password = 'demo123'
+  user.password_confirmation = 'demo123'
+end
+
+puts "Demo user created successfully!"

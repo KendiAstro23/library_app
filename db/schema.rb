@@ -10,39 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-ActiveRecord::Schema[8.0].define(version: 2025_02_11_185132) do
-  create_table "books", force: :cascade do |t|
-    t.string "title"
-    t.string "author"
-    t.string "isbn"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["isbn"], name: "index_books_on_isbn"
-  end
-
-  create_table "borrowings", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "book_id", null: false
-    t.date "due_date"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["book_id"], name: "index_borrowings_on_book_id"
-    t.index ["user_id"], name: "index_borrowings_on_user_id"
-=======
-ActiveRecord::Schema[8.0].define(version: 2025_02_13_210539) do
-=======
-ActiveRecord::Schema[8.0].define(version: 2025_02_14_091712) do
->>>>>>> bc5036a (Dashboard, borrowing page)
-=======
-ActiveRecord::Schema[8.0].define(version: 2025_02_15_044112) do
->>>>>>> 4c5ba97 (read-books building)
-=======
-ActiveRecord::Schema[8.0].define(version: 2025_05_27_164153) do
->>>>>>> e005310 (ebugged the borrowing books section, added my books page, improved login and profile editing)
+ActiveRecord::Schema[8.0].define(version: 2025_06_02_111547) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -69,7 +37,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_164153) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
->>>>>>> ce00263 (second draft, new files)
   end
 
   create_table "books", force: :cascade do |t|
@@ -84,6 +51,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_164153) do
     t.text "synopsis"
     t.string "image_url"
     t.boolean "available"
+    t.text "description"
+    t.date "published_date"
+    t.integer "page_count"
+    t.string "categories"
+    t.string "read_url"
+    t.boolean "has_online_copy", default: false, null: false
+    t.index ["has_online_copy"], name: "index_books_on_has_online_copy"
   end
 
   create_table "borrowings", force: :cascade do |t|
@@ -98,12 +72,24 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_164153) do
     t.index ["user_id"], name: "index_borrowings_on_user_id"
   end
 
+  create_table "saved_books", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "book_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["book_id"], name: "index_saved_books_on_book_id"
+    t.index ["user_id", "book_id"], name: "index_saved_books_on_user_id_and_book_id", unique: true
+    t.index ["user_id"], name: "index_saved_books_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
     t.string "user_agent"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.datetime "last_active_at"
+    t.index ["last_active_at"], name: "index_sessions_on_last_active_at"
     t.index ["user_id"], name: "index_sessions_on_user_id"
   end
 
@@ -112,26 +98,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_27_164153) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-<<<<<<< HEAD
-    t.string "email"
-=======
->>>>>>> ce00263 (second draft, new files)
     t.string "name"
     t.string "username"
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 
-<<<<<<< HEAD
-  add_foreign_key "borrowings", "books"
-  add_foreign_key "borrowings", "users"
-=======
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-<<<<<<< HEAD
->>>>>>> ce00263 (second draft, new files)
-=======
   add_foreign_key "borrowings", "books"
   add_foreign_key "borrowings", "users"
->>>>>>> 4c5ba97 (read-books building)
+  add_foreign_key "saved_books", "books"
+  add_foreign_key "saved_books", "users"
   add_foreign_key "sessions", "users"
 end
