@@ -2,17 +2,17 @@
 # exit on error
 set -o errexit
 
-# Remove any existing assets
-rm -rf public/assets
-
 # Install dependencies
 bundle install
 
 # Set up database
 bundle exec rake db:migrate
 
-# Precompile assets
-RAILS_ENV=production bundle exec rake assets:precompile
+# Clean assets
+rm -rf public/assets
 
-# Clean assets only if precompile was successful
-RAILS_ENV=production bundle exec rake assets:clean 
+# Precompile assets with explicit environment
+RAILS_ENV=production SECRET_KEY_BASE=dummy bundle exec rake assets:precompile
+
+# Skip assets:clean in production
+# bundle exec rake assets:clean is removed since it's causing issues 
