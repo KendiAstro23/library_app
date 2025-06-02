@@ -16,10 +16,10 @@ services:
         fromDatabase:
           name: library_app_production
           property: connectionString
-      - key: RAILS_MASTER_KEY
-        sync: false
       - key: RAILS_ENV
         value: production
+      - key: SECRET_KEY_BASE
+        generateValue: true
       - key: RAILS_SERVE_STATIC_FILES
         value: true
       - key: RAILS_LOG_TO_STDOUT

@@ -12,7 +12,7 @@ bundle exec rake db:migrate
 rm -rf public/assets
 
 # Precompile assets with explicit environment
-RAILS_ENV=production SECRET_KEY_BASE=dummy bundle exec rake assets:precompile
+bundle exec rake assets:precompile
 
 # Skip assets:clean in production
 # bundle exec rake assets:clean is removed since it's causing issues 
