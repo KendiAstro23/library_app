@@ -2,11 +2,9 @@ GEM
   specs:
     pg (1.5.9-x64-mingw-ucrt)
     sqlite3 (2.5.0-x64-mingw-ucrt)
-    sqlite3 (2.5.0-x86_64-linux-gnu)
 
 PLATFORMS
   x64-mingw-ucrt
-  x86_64-linux
 
 DEPENDENCIES
   pg
