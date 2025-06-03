@@ -5,27 +5,13 @@ services:
     plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb"
-    preDeployCommand: "bundle exec rails db:migrate"   # ⬅️ ADD THIS LINE
+    preDeployCommand: "bundle exec rails db:migrate"
     healthCheckPath: /health
     healthCheckTimeout: 5
     autoDeploy: false
-    buildFilter:
-      paths:
-      - app/**
-      - bin/**
-      - config/**
-      - db/**
-      - lib/**
-      - public/**
-      - Gemfile
-      - Gemfile.lock
-      - Rakefile
-      - config.ru
     envVars:
       - key: RAILS_ENV
         value: production
-      - key: PORT
-        value: 3000
       - key: RACK_ENV
         value: production
       - key: DATABASE_URL
@@ -40,5 +26,9 @@ services:
         value: true
       - key: RAILS_LOG_TO_STDOUT
         value: true
+      - key: WEB_CONCURRENCY
+        value: 2
       - key: RAILS_MAX_THREADS
+        value: 5
+      - key: RAILS_MIN_THREADS
         value: 5
