@@ -11,6 +11,8 @@ services:
     plan: free
     buildCommand: "./bin/render-build.sh"
     startCommand: "bundle exec puma -C config/puma.rb -p 3000"
+    healthCheckPath: /health
+    healthCheckTimeout: 5
     envVars:
       - key: PORT
         value: 3000

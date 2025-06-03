@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  # Health check endpoint
+  get "health", to: "health#show"
+
   # Root route
   root "pages#home"
 
