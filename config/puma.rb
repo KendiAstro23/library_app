@@ -29,24 +29,14 @@
 environment ENV.fetch("RAILS_ENV") { "development" }
 
 # Configure threads
-max_threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
-min_threads_count = ENV.fetch("RAILS_MIN_THREADS") { max_threads_count }
-threads min_threads_count, max_threads_count
-
-# Configure workers
-workers ENV.fetch("WEB_CONCURRENCY") { 2 }
+threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
+threads threads_count, threads_count
 
 # Set the port from environment variable
 port ENV.fetch("PORT") { 3000 }
 
-# Preload the application
-preload_app!
-
 # Allow puma to be restarted by `rails restart` command
 plugin :tmp_restart
-
-# Run the Solid Queue supervisor inside of Puma for single-server deployments
-plugin :solid_queue if ENV["SOLID_QUEUE_IN_PUMA"]
 
 # Specify the PID file
 pidfile ENV.fetch("PIDFILE") { "tmp/pids/server.pid" }

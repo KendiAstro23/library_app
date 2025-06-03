@@ -26,9 +26,5 @@ services:
         value: true
       - key: RAILS_LOG_TO_STDOUT
         value: true
-      - key: WEB_CONCURRENCY
-        value: 2
       - key: RAILS_MAX_THREADS
-        value: 5
-      - key: RAILS_MIN_THREADS
         value: 5
