@@ -21,7 +21,7 @@ test:
   database: storage/test.sqlite3
 
 production:
-  url: <%= ENV['postgresql://safari_database_6wm9_user:K2OjlN8I6x0RUjWnCAKa3tsrp1CLuIqX@dpg-d0vaeovdiees73cm0i3g-a/safari_database_6wm9'] %>
+  url: postgresql://safari_database_6wm9_user:K2OjlN8I6x0RUjWnCAKa3tsrp1CLuIqX@dpg-d0vaeovdiees73cm0i3g-a/safari_database_6wm9
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   adapter: postgresql
   encoding: unicode
