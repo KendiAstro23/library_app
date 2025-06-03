@@ -2,7 +2,8 @@
 # exit on error
 set -o errexit
 
-# Install dependencies
+# Install dependencies with frozen mode disabled
+bundle config set --local frozen false
 bundle install
 
 # Clean assets
