@@ -32,11 +32,11 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
-# Set the port
-port ENV.fetch("PORT") { 3000 }
+# Force port 3000
+port 3000
 
 # Specify the binding
-bind "tcp://0.0.0.0:#{ENV.fetch("PORT") { 3000 }}"
+bind "tcp://0.0.0.0:3000"
 
 # Allow puma to be restarted by `bin/rails restart` command.
 plugin :tmp_restart
