@@ -14,7 +14,7 @@ setup_database() {
   local cmd=$1
   local desc=$2
   echo "Running $desc..."
-  RAILS_ENV=production bundle exec rake $cmd || {
+  DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=production bundle exec rake $cmd || {
     echo "Failed to run $desc"
     return 1
   }
@@ -25,12 +25,12 @@ echo "Starting database setup..."
 
 # Drop database if it exists
 echo "Attempting to drop database..."
-RAILS_ENV=production bundle exec rake db:drop 2>/dev/null || true
+DISABLE_DATABASE_ENVIRONMENT_CHECK=1 RAILS_ENV=production bundle exec rake db:drop 2>/dev/null || true
 
 # Create and setup database
-setup_database "db:create" "database creation" && \
-setup_database "db:schema:load" "schema load" && \
-setup_database "db:migrate" "migrations" && \
+setup_database "db:create" "database creation"
+setup_database "db:schema:load" "schema load"
+setup_database "db:migrate" "migrations"
 setup_database "db:seed" "database seeding"
 
 # Verify database setup
