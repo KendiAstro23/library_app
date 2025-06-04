@@ -1,0 +1,2 @@
+[phases.setup]
+nixpkgs = ["libyaml", "postgresql", "pkg-config", "ruby", "gcc", "gmp"] 
