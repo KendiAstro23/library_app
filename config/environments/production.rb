@@ -89,7 +89,8 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
 
   # Allow Railway deployment URL
-  config.hosts << "web-production-cff1a.up.railway.app"
+  config.hosts.clear
+
   # For development purposes, you can uncomment the following line instead:
   # config.hosts.clear # This will allow all hosts (less secure)
 end
