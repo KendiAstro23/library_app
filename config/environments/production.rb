@@ -87,4 +87,9 @@ Rails.application.configure do
   #
   # Skip DNS rebinding protection for the default health check endpoint.
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
+
+  # Allow Railway deployment URL
+  config.hosts << "web-production-cff1a.up.railway.app"
+  # For development purposes, you can uncomment the following line instead:
+  # config.hosts.clear # This will allow all hosts (less secure)
 end
